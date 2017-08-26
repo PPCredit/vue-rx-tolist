@@ -27,16 +27,23 @@ module.exports = {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
+          loaders: {
+            css: 'vue-style-loader!css-loader!autoprefixer-loader',
+            less: 'vue-style-loader!css-loader!autoprefixer-loader!less-loader',
+            stylus: 'vue-style-loader!css-loader!autoprefixer-loader!stylus-loader'
+          },
           esModule: true
         }
       },
       {
-        test: /\.(png|jpg|gif|svg)$/,
-        loader: 'file-loader',
-        options: {
-          name: '[name].[ext]?[hash]'
-        }
-      }
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'autoprefixer-loader'
+        ]
+      },
+      { test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/, loader: 'url-loader?limit=8192'}
     ]
   },
   devServer: {
